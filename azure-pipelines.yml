@@ -24,7 +24,6 @@ stages:
   - job: BuildJob
     steps:
     - script: echo "=== Build Stage (Backend) ==="
-    - script: mvn clean package
       displayName: "Compilar y empaquetar con Maven"
     - script: echo "Compilación finalizada. Archivo .jar listo en /target."
 
