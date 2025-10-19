@@ -46,3 +46,5 @@ stages:
     - script: echo "=== Deployment Stage (Backend) ==="
     - script: echo "Despliegue simulado en entorno de prueba."
     - script: echo "Pipeline backend completado correctamente."
+
+
