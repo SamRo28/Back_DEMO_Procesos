@@ -1,0 +1,48 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Preparation
+  displayName: "Preparation"
+  jobs:
+  - job: PreparationJob
+    steps:
+    - script: echo "=== Preparation Stage (Backend) ==="
+    - script: java -version
+      displayName: "Verificar versión de Java"
+    - script: mvn -version
+      displayName: "Verificar versión de Maven"
+    - script: echo "Entorno listo para compilar."
+
+- stage: Build
+  displayName: "Build"
+  dependsOn: Preparation
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: echo "=== Build Stage (Backend) ==="
+      displayName: "Compilar y empaquetar con Maven"
+    - script: echo "Compilación finalizada. Archivo .jar listo en /target."
+
+- stage: Tests
+  displayName: "Tests"
+  dependsOn: Build
+  jobs:
+  - job: TestJob
+    steps:
+    - script: echo "=== Tests Stage (Backend) ==="
+    - script: echo "Aquí se ejecutarían los tests automáticos (si existieran)."
+    - script: echo "Tests simulados correctamente."
+
+- stage: Deployment
+  displayName: "Deployment"
+  dependsOn: Tests
+  jobs:
+  - job: DeployJob
+    steps:
+    - script: echo "=== Deployment Stage (Backend) ==="
+    - script: echo "Despliegue simulado en entorno de prueba."
+    - script: echo "Pipeline backend completado correctamente."
